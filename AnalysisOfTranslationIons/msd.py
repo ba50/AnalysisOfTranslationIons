@@ -4,43 +4,42 @@ from numeric import CreateIonPath, MsdStraightForward, MsdFft
 from load import LoadData
 
 
-def ComputeStraightForward(file_to_load, dimansions, ion_steps, scope):
+def ComputeStraightForward(file_to_load,
+                           dimansions,
+                           ion_steps, scope):
+    data = LoadData(file_to_load, dimansions, ion_steps, scope)
 
-    data = LoadData(file_to_load,dimansions,ion_steps,scope)
-
-    msd_n= np.zeros((len(data), ion_steps))
-    step=np.arange(ion_steps)
+    msd_n = np.zeros((len(data), ion_steps))
+    step = np.arange(ion_steps)
 
     for i, index in enumerate(data):
-        msd_n[i] = MsdStraightForward(index.reshape(ion_steps,3))
+        msd_n[i] = MsdStraightForward(index.reshape(ion_steps, 3))
 
-    msd=[]
-    sum=0
-    for j in range(0,ion_steps):
-        for i in range(0, len(data)):
+    msd = []
+    for j in range(ion_steps):
+        sum = 0
+        for i in range(len(data)):
             sum += msd_n[i][j]
-        msd.append(sum/len(data))
-        sum=0
+        msd.append(sum / len(data))
 
     return (step, msd)
+
 
 def ComputeFFT(file_to_load, dimansions, ion_steps, scope):
+    data = LoadData(file_to_load, dimansions, ion_steps, scope)
 
-    data = LoadData(file_to_load,dimansions,ion_steps,scope)
-
-    msd_n= np.zeros((len(data), ion_steps))
-    step=np.arange(ion_steps)
+    msd_n = np.zeros((len(data), ion_steps))
+    step = np.arange(ion_steps)
 
     for i, index in enumerate(data):
-        msd_n[i] = MsdFft(index.reshape(ion_steps,3))
+        msd_n[i] = MsdFft(index.reshape(ion_steps, 3))
 
-    msd=[]
-    sum=0
-    for j in range(0,ion_steps):
+    msd = []
+    sum = 0
+    for j in range(0, ion_steps):
         for i in range(0, len(data)):
             sum += msd_n[i][j]
-        msd.append(sum/len(data))
-        sum=0
+        msd.append(sum / len(data))
+        sum = 0
 
     return (step, msd)
-

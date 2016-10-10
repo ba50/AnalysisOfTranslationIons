@@ -1,14 +1,12 @@
 import numpy as np
 
 def CreateIonPath(translation, length, scope):
-
     data = []
     for seed in scope:
         step = 0
         lineData = np.empty((3, length))
-        for index in range(0, length):
-
-            lineData[:, index] =translation[seed+step] 
+        for index in range(length):
+            lineData[:, index] = translation[seed+step]
             step += 80
         data.append(lineData)
 
@@ -16,7 +14,7 @@ def CreateIonPath(translation, length, scope):
 
 def MsdStraightForward(r):
     shifts = np.arange(len(r))
-    msds = np.zeros(shifts.size)    
+    msds = np.zeros(shifts.size)
 
     for i, shift in enumerate(shifts):
         diffs = r[:-shift if shift else None] - r[shift:]
@@ -26,7 +24,6 @@ def MsdStraightForward(r):
     return msds
 
 def MsdFft(r):
-
   def autocorrFFT(x):
       N=len(x)
       F = np.fft.fft(x, n=2*N)  #2*N because of zero-padding
@@ -37,8 +34,8 @@ def MsdFft(r):
       return res/n #this is the autocorrelation in convention A
 
   N=len(r)
-  D=np.square(r).sum(axis=1) 
-  D=np.append(D,0) 
+  D=np.square(r).sum(axis=1)
+  D=np.append(D,0)
   S2=sum([autocorrFFT(r[:, i]) for i in range(r.shape[1])])
   Q=2*D.sum()
   S1=np.zeros(N)
