@@ -1,9 +1,10 @@
+import numpy as np
+
 import matplotlib.pyplot as plt
 import mpl_toolkits.mplot3d.axes3d as p3
 import matplotlib.animation as animation
 
-from load import load_data
-
+import load
 
 def translation(file_to_load, dimensions, ion_steps, scope):
 
@@ -11,9 +12,9 @@ def translation(file_to_load, dimensions, ion_steps, scope):
     fig = plt.figure()
     ax = p3.Axes3D(fig)
 
-    data = load_data(file_to_load, dimensions, ion_steps, scope)
-    for index in data:
-        ax.plot(index[0], index[1], index[2])
+    data = load.data(file_to_load, dimensions, ion_steps, scope)
+    for atom in range((scope[1] - scope[0])):
+        ax.plot(data[:, atom, 0],data[:, atom, 1],data[:, atom, 2])
 
    # Setting the axes properties
     ax.set_xlim3d([0.0, 1.0])
@@ -43,7 +44,7 @@ def animated_translation(file_to_load, dimensions, ion_steps, scope):
     fig = plt.figure()
     ax = p3.Axes3D(fig)
 
-    data = load_data(file_to_load, dimensions , ion_steps, scope)
+    data = load.data(file_to_load, dimensions , ion_steps, scope)
 
     ion_path = [ax.plot(dat[0, 0:1], dat[1, 0:1], dat[2, 0:1])[0] for dat in data]
 
@@ -68,12 +69,23 @@ def animated_translation(file_to_load, dimensions, ion_steps, scope):
 def msd(data):
     fig = plt.figure()
     ax = fig.gca()
-    fig.canvas.set_window_title(data[2])
+    fig.canvas.set_window_title(data[1])
 
     # Setting the axes properties
     ax.set_xlabel('time')
 
     ax.set_ylabel('Y')
 
-    ax.plot(data[0], data[1])
+    ax.plot(data[0][0], data[0][1])
+    plt.show()
+
+
+def n_msd_in_loop(msd):
+    fig = plt.figure()
+    ax = fig.gca()
+
+    for msd_for_atom in msd:
+        step = np.arange(len(msd_for_atom))
+        ax.plot(step, msd_for_atom)
+
     plt.show()

@@ -1,8 +1,8 @@
 import numpy as np
 import os
 import glob
+import numeric
 
-from numeric import create_ion_path
 
 
 # Wczytywanie danych z pliku i zapisywanie w formnie binarnej
@@ -26,7 +26,7 @@ def convert_dir_to_binary(dir_name_in, dir_name_out):
         convert_file_to_binary(os.path.join(dir_name_in, file), os.path.join(dir_name_out, file + '.dat'))
 
 
-def load_data(file_to_load, dimensions, ion_steps, scope):
+def data(file_to_load, dimensions, ion_steps, scope):
     filename = file_to_load
     translation = np.memmap(filename, dtype='float32', mode='r', shape=dimensions)
-    return create_ion_path(translation, ion_steps, scope)
+    return numeric.create_ion_path(translation, ion_steps, scope)

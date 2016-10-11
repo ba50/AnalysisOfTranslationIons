@@ -1,15 +1,15 @@
 import numpy as np
 
 
-def create_ion_path(translation, length, scope):
-    data = []
-    for seed in scope:
+def create_ion_path(translation, ion_steps, scope):
+    numer_of_ions = scope[1] - scope[0]
+    data = np.empty((ion_steps, numer_of_ions, 3))
+    for atom in range(numer_of_ions):
         step = 0
-        line_data = np.empty((3, length))
-        for index in range(length):
-            line_data[:, index] = translation[seed+step]
+        seed = atom + scope[0]
+        for index in range(ion_steps):
+            data[index, atom, :]  = translation[seed+step]
             step += 80
-        data.append(line_data)
 
     return data
 
