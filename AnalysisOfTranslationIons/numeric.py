@@ -1,6 +1,6 @@
 import numpy as np
 
-def CreateIonPath(translation, length, scope):
+def create_ion_path(translation, length, scope):
     data = []
     for seed in scope:
         step = 0
