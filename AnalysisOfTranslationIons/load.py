@@ -15,16 +15,16 @@ def convert_file_to_binary(file_to_load, file_to_save, skip_header=8, skip_foote
     fp[:] = data[:]
 
 
-def ConvertDirToBinary(dir_name_in, dir_name_out):
-    file_load = glob.glob('*')
+def convert_dir_to_binary(dir_name_in, dir_name_out):
     os.chdir(dir_name_in)
+    file_load = glob.glob("*")
 
-    os.chdir('..')
+    os.chdir("..")
     for file in file_load:
-        convert_file_to_binary(os.path.join(dir_name_in, file, dir_name_out, file + '.dat'))
+        convert_file_to_binary(os.path.join(dir_name_in, file), os.path.join(dir_name_out, file + '.dat'))
 
 
-def LoadData(file_to_load, dimansions, ion_steps, scope):
+def load_data(file_to_load, dimansions, ion_steps, scope):
     filename = file_to_load
     translation = np.memmap(filename, dtype='float32', mode='r', shape=dimansions)
     return CreateIonPath(translation, ion_steps, scope)

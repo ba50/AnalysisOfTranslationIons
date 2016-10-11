@@ -6,7 +6,7 @@ import matplotlib.animation as animation
 
 import os.path as path
 
-from numeric import CreateIonPath
+from numeric import create_ion_path
 from load import LoadData
 
 def Translation(file_to_load, dimansions, ion_steps, scope):

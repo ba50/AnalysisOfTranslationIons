@@ -1,13 +1,13 @@
 import numpy as np
 
-from numeric import CreateIonPath, MsdStraightForward, MsdFft
-from load import LoadData
+from numeric import create_ion_path, msd_straight_forward, msd_fft
+from load import load_data
 
 
-def ComputeStraightForward(file_to_load,
+def compute_straight_forward(file_to_load,
                            dimansions,
                            ion_steps, scope):
-    data = LoadData(file_to_load, dimansions, ion_steps, scope)
+    data = load_data(file_to_load, dimansions, ion_steps, scope)
 
     msd_n = np.zeros((len(data), ion_steps))
     step = np.arange(ion_steps)
@@ -25,8 +25,8 @@ def ComputeStraightForward(file_to_load,
     return (step, msd)
 
 
-def ComputeFFT(file_to_load, dimansions, ion_steps, scope):
-    data = LoadData(file_to_load, dimansions, ion_steps, scope)
+def compute_fft(file_to_load, dimansions, ion_steps, scope):
+    data = load_data(file_to_load, dimansions, ion_steps, scope)
 
     msd_n = np.zeros((len(data), ion_steps))
     step = np.arange(ion_steps)
