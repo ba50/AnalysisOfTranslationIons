@@ -1,12 +1,14 @@
-import plot, msd, load
 from os import path
+import plot, msd, load
 
 test = range(0,2)
 bi = range(0, 24)
-Y = range(24,32)
-O = range(32,80)
+y = range(24,32)
+o = range(32,80)
 
-#plot.Msd(msd.ComputeFFT('DataOut\\vv800_1x.dat', (160000,3), 2000, Bi))
-plot.Translation('DataOut\\vv800_1x.dat', (160000,3), 2000, bi)
-#plot.AnimatedTranslation(path.join("DataOut", "vv800_1x.dat"), (160000,3), 2000, bi)
-#load.ConvertDirToBinary('DataIn','DataOut')
+file = path.join("DataOut", "superc800_3.dat"), (480000, 3), 6000, o
+
+plot.msd(msd.compute_fft(file[0], file[1], file[2], file[3]))
+#plot.translation(file[0], file[1], file[2], file[3])
+#plot.animated_translation(file[0], file[1], file[2], file[3])
+#load.convert_dir_to_binary('supercell','DataOut')

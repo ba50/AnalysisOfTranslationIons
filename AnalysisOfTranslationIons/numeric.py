@@ -1,18 +1,20 @@
 import numpy as np
 
+
 def create_ion_path(translation, length, scope):
     data = []
     for seed in scope:
         step = 0
-        lineData = np.empty((3, length))
+        line_data = np.empty((3, length))
         for index in range(length):
-            lineData[:, index] = translation[seed+step]
+            line_data[:, index] = translation[seed+step]
             step += 80
-        data.append(lineData)
+        data.append(line_data)
 
     return data
 
-def MsdStraightForward(r):
+
+def msd_straight_forward(r):
     shifts = np.arange(len(r))
     msds = np.zeros(shifts.size)
 
@@ -23,7 +25,8 @@ def MsdStraightForward(r):
 
     return msds
 
-def MsdFft(r):
+
+def msd_fft(r):
   def autocorrFFT(x):
       N=len(x)
       F = np.fft.fft(x, n=2*N)  #2*N because of zero-padding
