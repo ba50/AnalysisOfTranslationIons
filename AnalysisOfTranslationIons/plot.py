@@ -80,11 +80,10 @@ def msd(data):
     plt.show()
 
 
-def n_msd_in_loop(msd):
+def x_y(r):
     fig = plt.figure()
     ax = fig.gca()
 
-    step = np.arange(len(msd))
-    ax.plot(step, msd)
+    ax.plot(r[0], r[1])
 
     plt.show()

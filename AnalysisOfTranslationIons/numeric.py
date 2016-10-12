@@ -66,3 +66,9 @@ def msd_fft(r):
       Q=Q-D[m-1]-D[N-m]
       S1[m]=Q/(N-m)
   return S1-2*S2
+
+
+def make_line(a, b, scope, num):
+    x = np.linspace(scope[0], scope[1], num=num)
+    y = a*x+b
+    return x, y
