@@ -14,14 +14,34 @@ def create_ion_path(translation, ion_steps, scope):
     return data
 
 
+def msd_simple(r):
+
+    msd=[]
+ #   print(r[0, 0])
+    for i in range(len(r)):
+ #       print(r[i,0]-r[0,0])
+        msd.append(np.square(r[i,0]-r[0,0])+
+                   np.square(r[i,1]-r[0,1])+
+                   np.square(r[i,2]-r[0,2]))
+
+    return msd
+
+
 def msd_straight_forward(r):
     shifts = np.arange(len(r))
     msds = np.zeros(shifts.size)
 
     for i, shift in enumerate(shifts):
         diffs = r[:-shift if shift else None] - r[shift:]
+#        print(r[:-shift if shift else None] )
+#        print("\n")
+ #       print(r[shift:])
+
         sqdist = np.square(diffs).sum(axis=1)
+#        print("\n")
+#        print(sqdist)
         msds[i] = sqdist.mean()
+#        print("------------------------------")
 
     return msds
 

@@ -72,11 +72,11 @@ def msd(data):
     fig.canvas.set_window_title(data[1])
 
     # Setting the axes properties
-    ax.set_xlabel('time')
+    ax.set_xlabel("time (ps)")
 
-    ax.set_ylabel('Y')
+    ax.set_ylabel("MSD (A**2 s**-1)")
 
-    ax.plot(data[0][0], data[0][1])
+    ax.plot(data[0][0]*10**-2, data[0][1]) # Zamiana na fs * 10, a nastempnie na ps *10**-3
     plt.show()
 
 
@@ -84,8 +84,7 @@ def n_msd_in_loop(msd):
     fig = plt.figure()
     ax = fig.gca()
 
-    for msd_for_atom in msd:
-        step = np.arange(len(msd_for_atom))
-        ax.plot(step, msd_for_atom)
+    step = np.arange(len(msd))
+    ax.plot(step, msd)
 
     plt.show()
