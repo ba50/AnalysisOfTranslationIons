@@ -1,22 +1,48 @@
 import numpy as np
 
 
-def create_ion_path(translation, ion_steps, scope):
+def boxed_ion_path(translation, ion_steps, scope):
     numer_of_ions = scope[1] - scope[0]
-    data = np.empty((ion_steps, numer_of_ions, 3))
-    for atom in range(numer_of_ions):
+    paths = np.empty((ion_steps, numer_of_ions, 3))
+    for ion in range(numer_of_ions):
         step = 0
-        seed = atom + scope[0]
-        for index in range(ion_steps):
-            data[index, atom, :]  = translation[seed+step]
+        seed = ion + scope[0]
+        for ion_step in range(ion_steps):
+            paths[ion_step, ion, :]  = translation[seed+step]
             step += 80
 
-    return data
+    return paths
 
-def ion_path_real(data):
-    print("{}-{}".format(data[1][0][0],data[0][0][0]))
-    print(data[1][0][0]-data[0][0][0])
-    print("5")
+def real_ion_path(translation, ion_steps, scope, cell_size=(0,0,0)):
+
+    numer_of_ions = scope[1]-scope[0]
+    paths = boxed_ion_path(translation, ion_steps, scope)
+    for ion in range(numer_of_ions):
+        for ion_step in range(ion_steps-1):
+            next_ion_step = ion_step+1
+
+            if paths[next_ion_step, ion, 0]-paths[ion_step, ion, 0] < 0.5:
+                paths[next_ion_step, ion, 0]+=1
+            if paths[next_ion_step, ion, 0]-paths[ion_step, ion, 0] > -0.5:
+                paths[next_ion_step, ion, 0]-=1
+
+            if paths[next_ion_step, ion, 1]-paths[ion_step, ion, 1] < 0.5:
+                paths[next_ion_step, ion, 1]+=1
+            if paths[next_ion_step, ion, 1]-paths[ion_step, ion, 1] > -0.5:
+                paths[next_ion_step, ion, 1]-=1
+
+
+            if paths[next_ion_step, ion, 2]-paths[ion_step, ion, 2] < 0.5:
+                paths[next_ion_step, ion, 2]+=1
+            if paths[next_ion_step, ion, 2]-paths[ion_step, ion, 2] > -0.5:
+                paths[next_ion_step, ion, 2]-=1
+
+    if not cell_size[0] == 0:
+        paths*=cell_size
+        paths/=2.0
+
+
+    return paths
 
 
 def msd_simple(r):
@@ -45,7 +71,7 @@ def msd_straight_forward(r):
         sqdist = np.square(diffs).sum(axis=1)
 #        print("\n")
 #        print(sqdist)
-        msds[i] = sqdist.mean()
+        msds[i] = sqdist[0]#.mean()
 #        print("------------------------------")
 
     return msds

@@ -6,15 +6,15 @@ import matplotlib.animation as animation
 
 import load
 
-def translation(file_to_load, dimensions, ion_steps, scope):
+def translation(file_to_load, dimensions, ion_steps, scope, cell_size):
 
    # Attaching 3D axis to the figure
     fig = plt.figure()
     ax = p3.Axes3D(fig)
 
-    data = load.data(file_to_load, dimensions, ion_steps, scope)
-    for atom in range((scope[1] - scope[0])):
-        ax.plot(data[:, atom, 0],data[:, atom, 1],data[:, atom, 2])
+    paths = load.data(file_to_load, dimensions, ion_steps, scope, cell_size)
+    for ion in range((scope[1] - scope[0])):
+        ax.plot(paths[:, ion, 0],paths[:, ion, 1],paths[:, ion, 2])
 
    # Setting the axes properties
     ax.set_xlim3d([0.0, 1.0])
@@ -31,7 +31,7 @@ def translation(file_to_load, dimensions, ion_steps, scope):
     plt.show()
 
 
-def animated_translation(file_to_load, dimensions, ion_steps, scope):
+def animated_translation(file_to_load, dimensions, ion_steps, scope, cell_size):
 
     def update_lines(num, data_lines, lines):
         for line, data_temp in zip(lines, data_lines):
@@ -44,7 +44,7 @@ def animated_translation(file_to_load, dimensions, ion_steps, scope):
     fig = plt.figure()
     ax = p3.Axes3D(fig)
 
-    data = load.data(file_to_load, dimensions , ion_steps, scope)
+    data = load.data(file_to_load, dimensions , ion_steps, scope, cell_size)
 
     ion_path = [ax.plot(dat[0, 0:1], dat[1, 0:1], dat[2, 0:1])[0] for dat in data]
 

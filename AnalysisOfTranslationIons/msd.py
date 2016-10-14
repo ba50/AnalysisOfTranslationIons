@@ -5,8 +5,8 @@ import load
 import plot
 
 
-def simple(file_to_load, dimensions, ion_steps, scope):
-    data = load.data(file_to_load, dimensions, ion_steps, scope)
+def simple(file_to_load, dimensions, ion_steps, scope, cell_size):
+    data = load.data(file_to_load, dimensions, ion_steps, scope, cell_size)
 
     msd_n = np.zeros((len(data), ion_steps))
     step = np.arange(ion_steps)
@@ -26,8 +26,9 @@ def simple(file_to_load, dimensions, ion_steps, scope):
 def straight_forward(file_to_load,
                              dimensions,
                              ion_steps,
-                             scope):
-    data = load.data(file_to_load, dimensions, ion_steps, scope)
+                             scope,
+                             cell_size):
+    data = load.data(file_to_load, dimensions, ion_steps, scope, cell_size)
 
     msd_n = np.zeros((len(data), ion_steps))
     step = np.arange(ion_steps)
@@ -44,8 +45,8 @@ def straight_forward(file_to_load,
     return step, msd
 
 
-def fft(file_to_load, dimensions, ion_steps, scope):
-    data = load.data(file_to_load, dimensions, ion_steps, scope)
+def fft(file_to_load, dimensions, ion_steps, scope, cell_size):
+    data = load.data(file_to_load, dimensions, ion_steps, scope, cell_size)
 
     msd_n = np.zeros((len(data), ion_steps))
     step = np.arange(ion_steps, dtype='float32')

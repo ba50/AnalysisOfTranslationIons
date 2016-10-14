@@ -26,7 +26,7 @@ def convert_dir_to_binary(dir_name_in, dir_name_out, dimensions):
         convert_file_to_binary(os.path.join(dir_name_in, file), os.path.join(dir_name_out, file + '.dat'), dimensions)
 
 
-def data(file_to_load, dimensions, ion_steps, scope):
+def data(file_to_load, dimensions, ion_steps, scope, cell_size):
     filename = file_to_load
     translation = np.memmap(filename, dtype='float32', mode='r', shape=dimensions)
-    return numeric.ion_path_real(numeric.create_ion_path(translation, ion_steps, scope))
+    return numeric.real_ion_path(translation, ion_steps, scope, cell_size)

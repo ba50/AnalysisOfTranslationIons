@@ -5,13 +5,12 @@ import matplotlib.pyplot as plt
 
 import diffusion
 
-test = 32, 34
+test = 32, 33
 bi = 0, 24
 y = 24,32
 o = 32,80
 
-file = path.join("DataOut", "superc800_2.dat"), (480000, 3), 6000, o
-file1 = path.join("DataOut", "superc1000_2.dat"), (480000, 3), 6000, o
+file = path.join("DataOut", "vv800_1x.dat"), (160000, 3), 6, test
 
 #plot.msd((msd.fft(file[0], file[1], file[2], file[3]), file[0]))
 plot.translation(file[0], file[1], file[2], file[3])
