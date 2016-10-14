@@ -29,4 +29,4 @@ def convert_dir_to_binary(dir_name_in, dir_name_out, dimensions):
 def data(file_to_load, dimensions, ion_steps, scope):
     filename = file_to_load
     translation = np.memmap(filename, dtype='float32', mode='r', shape=dimensions)
-    return numeric.create_ion_path(translation, ion_steps, scope)
+    return numeric.ion_path_real(numeric.create_ion_path(translation, ion_steps, scope))

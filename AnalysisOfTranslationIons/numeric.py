@@ -13,6 +13,11 @@ def create_ion_path(translation, ion_steps, scope):
 
     return data
 
+def ion_path_real(data):
+    print("{}-{}".format(data[1][0][0],data[0][0][0]))
+    print(data[1][0][0]-data[0][0][0])
+    print("5")
+
 
 def msd_simple(r):
 
