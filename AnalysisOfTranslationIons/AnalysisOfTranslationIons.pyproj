@@ -23,6 +23,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="AnalysisOfTranslationIons.py" />
+    <Compile Include="diffusion.py" />
     <Compile Include="load.py" />
     <Compile Include="msd.py" />
     <Compile Include="numeric.py" />
