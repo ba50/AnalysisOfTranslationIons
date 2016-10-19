@@ -1,24 +1,24 @@
 import numpy as np
 
 
-def boxed_ion_path(translation, ion_steps, scope):
-    numer_of_ions = scope[1] - scope[0]
+def boxed_ion_path(translation, ion_steps_scope, ions_scope):
+    numer_of_ions = ions_scope[1] - ions_scope[0]
     paths = np.empty((ion_steps, numer_of_ions, 3))
     for ion in range(numer_of_ions):
-        step = 0
-        seed = ion + scope[0]
-        for ion_step in range(ion_steps):
+        step = ion_steps_scope[0]
+        seed = ion + ions_scope[0]
+        for ion_step in range(ion_steps_scope[0], ion_steps_scope[1]):
             paths[ion_step, ion, :]  = translation[seed+step]
             step += 80
 
     return paths
 
-def real_ion_path(translation, ion_steps, scope, cell_size=(0,0,0)):
+def real_ion_path(translation, ion_steps_scope, ions_scope, cell_size=(0,0,0)):
 
     numer_of_ions = scope[1]-scope[0]
-    paths = boxed_ion_path(translation, ion_steps, scope)
+    paths = boxed_ion_path(translation, ion_steps_scope, ions_scope)
     for ion in range(numer_of_ions):
-        for ion_step in range(ion_steps-1):
+        for ion_step in range(ion_steps_scope[0], ion_steps_scope[1]-1):
             next_ion_step = ion_step+1
 
             if paths[next_ion_step, ion, 0]-paths[ion_step, ion, 0] < 0.5:

@@ -5,15 +5,15 @@ import matplotlib.pyplot as plt
 
 import diffusion
 
-test = 0, 2
-bi = 0, 24
-y = 24,32
-o = 32,80
+test    = 0, 2
+bi      = 0, 24
+y       = 24, 32
+o       = 32, 80
 
 cell_size = 5.559, 5.559, 5.559
 
-file = path.join("DataOut", "superc700_1.dat"), (480000, 3), 6000, o, cell_size
-file1 = path.join("DataOut", "superc700_1.dat"), (480000, 3), 6000, o, cell_size
+file = path.join("data_out", "superc700_1.dat"), (480000, 3), 6000, o, cell_size
+file1 = path.join("data_out", "superc700_1.dat"), (480000, 3), 6000, o, cell_size
 
 #plot.msd((msd.simple(file[0], file[1], file[2], file[3], file[4]), file[0]))
 #plot.translation(file[0], file[1], file[2], file[3], file[4])
