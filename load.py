@@ -6,10 +6,10 @@ import glob
 import numeric
 
 
-
 # Wczytywanie danych z pliku i zapisywanie w formnie binarnej
 # In: nazwa pliku do wczytania, kolumny, wiersze
 # Out: plik do wczytania
+
 
 def convert_file_to_binary(file_to_load, file_to_save, dimensions, skip_header=0, skip_footer=0):
     print("Loding file: {}".format(file_to_load))
@@ -28,7 +28,13 @@ def convert_dir_to_binary(dir_name_in, dir_name_out, dimensions):
         convert_file_to_binary(os.path.join(dir_name_in, file), os.path.join(dir_name_out, file + '.dat'), dimensions)
 
 
-def data(file_to_load, dimensions, ion_steps, scope, cell_size):
-    filename = file_to_load
+def data(init_tuple):
+
+    filename = init_tuple[0]
+    dimensions = init_tuple[1]
+    ion_steps_scope = init_tuple[2]
+    ions_scope = init_tuple[3]
+    cell_size = init_tuple[4]
+
     translation = np.memmap(filename, dtype='float32', mode='r', shape=dimensions)
-    return numeric.real_ion_path(translation, ion_steps, scope, cell_size)
+    return numeric.real_ion_path(translation, ion_steps_scope, ions_scope, cell_size)

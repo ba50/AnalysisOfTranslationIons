@@ -6,15 +6,21 @@ import matplotlib.animation as animation
 
 import load
 
-def translation(file_to_load, dimensions, ion_steps, scope, cell_size):
+
+def translation(init_tuple):
+
+    filename = init_tuple[0]
+    ion_steps_scope = init_tuple[2]
+    ions_scope = init_tuple[3]
+    number_of_ions = ions_scope[1] - ions_scope[0]
 
    # Attaching 3D axis to the figure
     fig = plt.figure()
     ax = p3.Axes3D(fig)
 
-    paths = load.data(file_to_load, dimensions, ion_steps, scope, cell_size)
-    for ion in range((scope[1] - scope[0])):
-        ax.plot(paths[:, ion, 0],paths[:, ion, 1],paths[:, ion, 2])
+    paths = load.data(init_tuple)
+    for ion in range(number_of_ions):
+        ax.plot(paths[:, ion, 0], paths[:, ion, 1], paths[:, ion, 2])
 
    # Setting the axes properties
     ax.set_xlim3d([0.0, 1.0])
@@ -26,7 +32,7 @@ def translation(file_to_load, dimensions, ion_steps, scope, cell_size):
     ax.set_zlim3d([0.0, 1.0])
     ax.set_zlabel('Z')
 
-    ax.set_title('Diffusion plot in: {}'.format(file_to_load))
+    ax.set_title('Diffusion plot in: {}'.format(filename))
 
     plt.show()
 
@@ -44,7 +50,7 @@ def animated_translation(file_to_load, dimensions, ion_steps, scope, cell_size):
     fig = plt.figure()
     ax = p3.Axes3D(fig)
 
-    data = load.data(file_to_load, dimensions , ion_steps, scope, cell_size)
+    data = load.data(file_to_load, dimensions, ion_steps, scope, cell_size)
 
     ion_path = [ax.plot(dat[0, 0:1], dat[1, 0:1], dat[2, 0:1])[0] for dat in data]
 
