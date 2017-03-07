@@ -10,9 +10,9 @@ def boxed_ion_path(translation, ion_steps_scope, ions_scope):
     for ion in range(number_of_ions):
         seed = ion + ions_scope[0]
         step = 0
-        for ion_step in range(number_of_ion_steps):
+        for ion_step in range(10):
             paths[ion_step, ion, :] = translation[seed+step]
-            step += 80
+            step += 745
 
     return paths
 

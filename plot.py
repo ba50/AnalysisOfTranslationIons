@@ -23,13 +23,13 @@ def translation(init_tuple):
         ax.plot(paths[:, ion, 0], paths[:, ion, 1], paths[:, ion, 2])
 
    # Setting the axes properties
-    ax.set_xlim3d([0.0, 1.0])
+    ax.set_xlim3d([0.0, 6.0])
     ax.set_xlabel('X')
 
-    ax.set_ylim3d([0.0, 1.0])
+    ax.set_ylim3d([0.0, 6.0])
     ax.set_ylabel('Y')
 
-    ax.set_zlim3d([0.0, 1.0])
+    ax.set_zlim3d([0.0, 6.0])
     ax.set_zlabel('Z')
 
     ax.set_title('Diffusion plot in: {}'.format(filename))
